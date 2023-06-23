@@ -2,7 +2,7 @@
   <div>
 
     <div class="poke-container">
-      <div class="pokemon" v-for="pokemon in pokemons" :key="pokemon.id" :style="{ backgroundColor: getColor(pokemon) }">
+      <div class="pokemon" v-for="pokemon in pokemonData" :key="pokemon.id" :style="{ backgroundColor: getColor(pokemon) }">
         <div class="img-container">
           <img :src="pokemon.sprites.front_default" :alt="pokemon.name">
         </div>
@@ -20,7 +20,7 @@
 export default {
   data() {
     return {
-      pokemons: []
+      pokemonData: []
     };
   },
   mounted() {
@@ -41,7 +41,7 @@ export default {
       }
     },
     createPokemonCard(pokemon) {
-      this.pokemons.push(pokemon);
+      this.pokemonData.push(pokemon);
     },
     getColor(pokemon) {
       const colors = {
