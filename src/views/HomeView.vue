@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
-
-<template>
-  <main>
-    <TheWelcome />
-  </main>
-</template>
-=======
 <template>
   <div>
 
@@ -153,4 +142,3 @@ h1 {
   letter-spacing: 1px;
 }
 </style>
->>>>>>> 20753252699d933bc5217f6d06e3b3fd63cffa44
