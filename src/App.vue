@@ -1,4 +1,5 @@
 <script setup>
+<<<<<<< HEAD
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 </script>
@@ -83,3 +84,13 @@ nav a:first-of-type {
   }
 }
 </style>
+=======
+import HomeView from './views/HomeView.vue';
+
+
+</script>
+
+<template>
+  <HomeView />
+</template>
+>>>>>>> 20753252699d933bc5217f6d06e3b3fd63cffa44

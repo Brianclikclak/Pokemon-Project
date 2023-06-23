@@ -10,6 +10,10 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "axios": "^1.4.0",
+>>>>>>> 20753252699d933bc5217f6d06e3b3fd63cffa44
     "pinia": "^2.1.3",
     "vue": "^3.3.4",
     "vue-router": "^4.2.2"
