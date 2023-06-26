@@ -1,14 +1,17 @@
 
-<script setup>
+<script >
 
-import CardComponentVue from '../components/CardComponent.vue';
-import Pokemon from '../services/apiService';
+import CardComponent from '../components/CardComponent.vue';
 
-
+export default {
+  name: 'Homeview',
+  components: {
+    CardComponent,
+  },
+};
 
 </script>
 
 <template>
-  <CardComponentVue/>
-  <Pokemon/>
+  <CardComponent/>
 </template>

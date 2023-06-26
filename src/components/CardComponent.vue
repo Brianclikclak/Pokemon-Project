@@ -1,77 +1,58 @@
 
-<script setup>
-import Pokemon from '../services/apiService';
-import { onBeforeMount, ref } from "vue";
+<script>
+    import { ref, onMounted } from 'vue';
+    import { fetchPokemonList } from '../services/apiService.js';
+    
+    export default {
+    name: 'CardComponent',
+    setup(){
+        const pokemons = ref([]);
+    
+    onMounted(async() => {
+        pokemons.value= await fetchPokemonList();
+        });
+      
+    return {
+        pokemons,
+    };
+},
+    };
 
-const props = defineProps({
-		name: {
-			type: String,
-			default: null,
-		},
-		url: {
-			type: String,
-			
-		},
-	});
-
-  let pokeDetails = ref({});
-	let pokemonImg = ref();
-  let pokemonName = ref("");
-	let pokemonId = ref();
-	let pokemonType = ref();
-	let pokeType = ref("");
-	
-	
-    onBeforeMount(async () => {
-      const response = await fetch(props.url);
-      const pokemon = await response.json();
-      console.log(pokemon);
-
-      pokemon= pokeDetails.value;
-      pokemonName.value=pokemon.name;
-      pokemonImg.value = pokemon.value.sprites.other.home.front_default;
-      pokemonId.value = pokemon.value.id;
-      pokemonType.value = pokemon.value.types[0].type.name;
-      pokeType = pokemonType.value;
-
-    getColor(pokemon); {
-
-      const colors = {
-        fire: '#FDDFDF',
-        grass: '#DEFDE0',
-        electric: '#FCF7DE',
-        water: '#DEF3FD',
-        ground: '#f4e7da',
-        rock: '#d5d5d4',
-        fairy: '#fceaff',
-        poison: '#98d7a5',
-        bug: '#f8d5a3',
-        dragon: '#97b3e6',
-        psychic: '#eaeda1',
-        flying: '#F5F5F5',
-        fighting: '#E6E0D4',
-        normal: '#F5F5F5',
-      }
-      return colors[pokeType];
-    }
-})
 </script>
 
 <template>
-    <div>
-      <div class="poke-container">
-      <div class="pokemon" v-for="pokemon in Pokemon" :key="pokemon.id" :style="{ backgroundColor: getColor(pokemon) }">
-          <div class="img-container">
-            <img :src="pokemonImg" :alt="pokemonName">
-          </div>
-          <div class="info">
-            <span class="number">{{ pokemonId.toString().padStart(3, '0') }}</span>
-            <h3 class="name">{{ pokemonName }}</h3>
+  <div class="poke-container">
+   
+    <div v-for="pokemon in pokemons" :key="pokemon.name" >
+        <span class="number">{{ pokemon.id }}</span> 
+        <h3>{{ pokemon.name }}</h3>
+    </div>
+</div>
+    <!--   
+ <div class="info">
+   <div class="img-container">
+         <img :src="pokemons.image" :alt="pokemonData.name"/>
+              
+    </div>
+            
+          
+  </div>-->
+   
+        
+         <!--
+                  
+            
+          
+            <h3 class="name">{{ pokemon.name }}</h3>
             <small class="type">Type: <span>{{ pokeType.join(', ') }}</span></small>
           </div>
-        </div>
-      </div>
-   </div>
+          </div>
+          </div>
+          toString().padStart(3, '0')
+          -->
+        
+      
+  
   </template>
 
 
