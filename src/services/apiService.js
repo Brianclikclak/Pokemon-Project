@@ -30,7 +30,7 @@ export async function PokemonList(){
     for (let i = 1; i <= cont ; i++) {
       const response = await axios.get(apiUrl + i);
       const pokemon = response.data;
-      
+      console.log(pokemon);
       const pokemonDetails ={
       name: pokemon.name,
       id: pokemon.id.toString().padStart(3, '0'),
