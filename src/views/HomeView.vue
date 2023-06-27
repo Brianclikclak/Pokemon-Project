@@ -2,6 +2,7 @@
 <script setup >
 
 import CardComponent from '../components/CardComponent.vue';  
+/* import DetailCardComponent from '../components/DetailCardComponent.vue'; */
 
 
 </script>
