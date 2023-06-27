@@ -5,5 +5,6 @@
 <template>
 
   <RouterLink to="/"></RouterLink>
+  <RouterLink to="Details"></RouterLink>
   <RouterView/>
 </template>
