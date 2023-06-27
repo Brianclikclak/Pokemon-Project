@@ -15,6 +15,7 @@
       
     return {
         pokemons,
+        
     };
 },
 
@@ -30,34 +31,14 @@
       <h3 class="name">{{ pokemon.name }}</h3> </div>
       <small class="type">type: <span>{{ pokemon.type }}</span></small>
       
+      
         
 
         
     </div>
 </div>
      
-  <!-- <div class="info">
-   <div class="img-container">
-         <img :src="pokemons.image" :alt="pokemonData.name"/>
-              
-    </div>
-            
-          
-  </div>  -->
-   
-        
-         <!--
-                  
-            
-          
-            <h3 class="name">{{ pokemon.name }}</h3>
-            <small class="type">Type: <span>{{ pokeType.join(', ') }}</span></small>
-          </div>
-          </div>
-          </div>
-          toString().padStart(3, '0')
-          -->
-        
+ 
       
   
   </template>
