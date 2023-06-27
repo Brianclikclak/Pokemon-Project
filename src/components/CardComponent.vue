@@ -23,6 +23,8 @@
 </script>
 
 <template>
+<!-- <h2><img src="https://user-images.githubusercontent.com/29473781/180619084-a56960ab-7efa-4e34-9d33-4e3e581d62ff.png" alt=""></h2> -->
+  
   <div class="poke-container">
     <div class="pokemon" v-for="pokemon in pokemons" :key="pokemon.name" >
       <div class="img-container">
@@ -32,7 +34,13 @@
         <span class="number">#{{ pokemon.id }}</span> 
         <h3 class="name">{{ pokemon.name }}</h3> 
       </div>
-      <small class="type" :style="{ backgroundColor: pokemon.colors[0] }"><span>{{ pokemon.type }}</span></small>
+      <!-- <small class="type" :style="{ backgroundColor: pokemon.colors[0] }"><span>{{ pokemon.type }}</span></small> -->
+      <div class="types">
+        <div class="type" v-for="(type, index) in pokemon.types" :key="index" :style="{ backgroundColor: type.color }">
+          {{ type.name }}
+        </div>
+      </div>
+       
       
         
 
@@ -52,18 +60,18 @@
 }
 
 body {
-  background: #efefbb;
-  background: linear-gradient(to right, #d4d3dd, #efefbb);
   font-family: "Lato", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 0;
+  background-image: url(../assets/images/container_bg.png);
 }
 
-h1 {
-  letter-spacing: 3px;
+h2 {
+  display: flex;
+  justify-content: center;
 }
 
 .poke-container {
@@ -75,7 +83,7 @@ h1 {
 }
 
 .pokemon {
-  background-color: #eee;
+  background-color: #c0bfbf;
   border-radius: 10px;
   box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
   padding: 20px;
@@ -85,8 +93,8 @@ h1 {
 .pokemon .img-container {
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 200px;
+  height: 200px;
   text-align: center;
   margin: 0 auto;
 }
@@ -94,7 +102,14 @@ h1 {
 .pokemon .img-container img {
   max-width: 90%;
   margin-top: 20px;
+  width: 200px;
+    
+   
+    
+
+    
 }
+
 
 .pokemon .info {
   margin-top: 20px;
@@ -105,16 +120,28 @@ h1 {
   padding: 5px 10px;
   border-radius: 10px;
   font-size: 0.8em;
+  font-weight: bold;
+  color: #4b4b4b;
 }
 
 .pokemon .info .name {
   margin: 15px 0 7px;
   letter-spacing: 1px;
 }
+.types{
+  justify-content: center;
+    max-width: 200px;
+    text-align: center;
+    display: flex;
+    gap: 5px;
+}
+
 
 .type{
-  border-radius: 20px;
+  border-radius: 3px;
   padding: 8px;
+  width: 80px;
+  color: white;
   
   
 }
