@@ -1,8 +1,7 @@
 
 <script>
     import { ref, onMounted } from 'vue';
-    import { fetchPokemonList } from '../services/apiService.js';
-    /* import { colorPokemon } from '../js/functions.js'; */
+    import { PokemonList } from '../services/apiService.js';
     
     export default {
     name: 'CardComponent',
@@ -10,7 +9,7 @@
         const pokemons = ref([]);
     
     onMounted(async() => {
-        pokemons.value= await fetchPokemonList();
+        pokemons.value= await PokemonList();
         });
       
     return {
@@ -24,46 +23,26 @@
 
 <template>
   <div class="poke-container">
-    <div class="pokemon" v-for="pokemon in pokemons" :key="pokemon.name"  >
-      <div class="img-container"><img :src="pokemon.image" alt=""></div>
-      <div class="info"><span class="number">#{{ pokemon.id }}</span> 
-      <h3 class="name">{{ pokemon.name }}</h3> </div>
-      <small class="type">type: <span>{{ pokemon.type }}</span></small>
+    <div class="pokemon" v-for="pokemon in pokemons" :key="pokemon.name" >
+      <div class="img-container">
+        <img :src="pokemon.image" alt="">
+      </div>
+      <div class="info">
+        <span class="number">#{{ pokemon.id }}</span> 
+        <h3 class="name">{{ pokemon.name }}</h3> 
+      </div>
+      <small class="type" :style="{ backgroundColor: pokemon.colors[0] }"><span>{{ pokemon.type }}</span></small>
       
         
 
         
     </div>
 </div>
-     
-  <!-- <div class="info">
-   <div class="img-container">
-         <img :src="pokemons.image" :alt="pokemonData.name"/>
-              
-    </div>
-            
-          
-  </div>  -->
-   
-        
-         <!--
-                  
-            
-          
-            <h3 class="name">{{ pokemon.name }}</h3>
-            <small class="type">Type: <span>{{ pokeType.join(', ') }}</span></small>
-          </div>
-          </div>
-          </div>
-          toString().padStart(3, '0')
-          -->
-        
-      
-  
+
   </template>
 
 
-<style >
+<style>
 
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400&display=swap");
 
@@ -93,6 +72,7 @@ h1 {
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .pokemon {
   background-color: #eee;
   border-radius: 10px;
@@ -129,5 +109,12 @@ h1 {
 .pokemon .info .name {
   margin: 15px 0 7px;
   letter-spacing: 1px;
+}
+
+.type{
+  border-radius: 20px;
+  padding: 8px;
+  
+  
 }
 </style>
