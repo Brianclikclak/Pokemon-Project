@@ -26,7 +26,8 @@
 <!-- <h2><img src="https://user-images.githubusercontent.com/29473781/180619084-a56960ab-7efa-4e34-9d33-4e3e581d62ff.png" alt=""></h2> -->
   
   <div class="poke-container">
-    <div class="pokemon" v-for="pokemon in pokemons" :key="pokemon.name" >
+    <div class="pokemon" v-for="pokemon in pokemons" :key="pokemon.name" @click="goToPokemonDetails(pokemon.id)"></div>
+ 
       <div class="img-container">
         <img :src="pokemon.image" alt="">
       </div>

@@ -1,6 +1,7 @@
 
 <script setup >
 
+import pokeLogo from '../assets/images/pokeLogo.vue';
 import CardComponent from '../components/CardComponent.vue';  
 /* import DetailCardComponent from '../components/DetailCardComponent.vue'; */
 
@@ -9,7 +10,9 @@ import CardComponent from '../components/CardComponent.vue';
 
 
 <template>
-  <h2><img src="https://user-images.githubusercontent.com/29473781/180619084-a56960ab-7efa-4e34-9d33-4e3e581d62ff.png" alt=""></h2>
+  <div class="logo">
+            <a href="/"><pokeLogo/></a>
+        </div>
   <form class="filter">
         <div class="filter__search">
             <label for="search" class="search__title">Search by name </label>
