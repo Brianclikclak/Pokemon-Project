@@ -2,6 +2,7 @@
 <script>
     import { ref, onMounted } from 'vue';
     import { fetchPokemonList } from '../services/apiService.js';
+    /* import { colorPokemon } from '../js/functions.js'; */
     
     export default {
     name: 'CardComponent',
@@ -16,27 +17,33 @@
         pokemons,
     };
 },
+
     };
 
 </script>
 
 <template>
   <div class="poke-container">
-   
-    <div v-for="pokemon in pokemons" :key="pokemon.name" >
-        <span class="number">{{ pokemon.id }}</span> 
-        <h3>{{ pokemon.name }}</h3>
+    <div class="pokemon" v-for="pokemon in pokemons" :key="pokemon.name"  >
+      <div class="img-container"><img :src="pokemon.image" alt=""></div>
+      <div class="info"><span class="number">#{{ pokemon.id }}</span> 
+      <h3 class="name">{{ pokemon.name }}</h3> </div>
+      <small class="type">type: <span>{{ pokemon.type }}</span></small>
+      
+        
+
+        
     </div>
 </div>
-    <!--   
- <div class="info">
+     
+  <!-- <div class="info">
    <div class="img-container">
          <img :src="pokemons.image" :alt="pokemonData.name"/>
               
     </div>
             
           
-  </div>-->
+  </div>  -->
    
         
          <!--
@@ -56,7 +63,7 @@
   </template>
 
 
-<style setup>
+<style >
 
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400&display=swap");
 
