@@ -39,8 +39,8 @@ export async function PokemonList() {
         experience: pokemon.base_experience,
         height: pokemon.height,
         weight: pokemon.weight,
-        area: pokemon.location_area_encounters,
-        /* stats: {
+        /*area: pokemon.location_area_encounters,
+         stats: {
           hp: pokemon.stats[0].base_stat,
           attack: pokemon.stats[1].base_stat,
           defense: pokemon.stats[2].base_stat,
