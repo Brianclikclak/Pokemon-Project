@@ -1,5 +1,4 @@
 
-
 import axios from 'axios';
 
 const colors = {
@@ -17,46 +16,40 @@ const colors = {
   flying: '#3dc7ef',
   fighting: '#d56723',
   normal: '#A4ACAF',
-  ghost : '#7b62a3 ',
+  ghost : '#7b62a3',
   ice : '#51c4e7',
+  steel : '#9eb7b8',
 }; 
 
-
-export async function PokemonList(){
+export async function PokemonList() {
   const cont = 150;
-  const apiUrl="https://pokeapi.co/api/v2/pokemon/";
-  const pokemons =[];
-  try{
-    for (let i = 1; i <= cont ; i++) {
+  const apiUrl = "https://pokeapi.co/api/v2/pokemon/";
+  const pokemons = [];
+
+  try {
+    for (let i = 1; i <= cont; i++) {
       const response = await axios.get(apiUrl + i);
       const pokemon = response.data;
-      
-      const pokemonDetails ={
-      name: pokemon.name,
-      id: pokemon.id.toString().padStart(3, '0'),
-      image: pokemon.sprites.front_default,
-      type: pokemon.types.map((type) => type.type.name).join(', '),
-      colors: pokemon.types.map((type) => colors[type.type.name]),  
-    }; 
-  pokemons.push(pokemonDetails);  
-  
-  pokemons.forEach((pokemon) => {
-    const pokemonColors = pokemon.colors;
-    const pokemonTypeElements = document.querySelectorAll(`.${pokemon.name.toLowerCase()}-type`);
 
-    pokemonTypeElements.forEach((element) => {
-      element.style.color = pokemonColors[0]; // Asignar color al texto del tipo
-      element.style.backgroundColor = pokemonColors[0]; // Asignar color de fondo al tipo
-    });
-  });
+      const pokemonDetails = {
+        name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).toLowerCase(),
+        id: pokemon.id.toString().padStart(3, '0'),
+        image: pokemon.sprites.front_default,
+        types: pokemon.types.map((type) => ({
+          name: type.type.name,
+          color: colors[type.type.name],
+        })),
+      };
 
-  console.log(pokemons);
-    }  
-  }  catch(error) {
-          console.log("Error: No se pueden obtener los datos", error);
-        }
-  return pokemons;
-}           
+      pokemons.push(pokemonDetails);
+    }
+
+    return pokemons;
+  } catch (error) {
+    console.log("Error: No se pueden obtener los datos", error);
+    return [];
+  }
+}
 
 
 
@@ -64,25 +57,7 @@ export async function PokemonList(){
 
    
     
-/*import axios from 'axios'
 
-export default {
-    name: 'Pokemon',
-    data(){
-      return{
-        posts:[]
-      }
-    },
-    mounted(){
-      axios.get('https://pokeapi.co/api/v2/pokemon?limit=150&offset=0"')
-
-      .then(function(response){
-        //let vue = this;
-        this.posts= response.data;
-        console.log(this.posts)
-      })
-    }
-  }*/
 
 
 
