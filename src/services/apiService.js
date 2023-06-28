@@ -29,30 +29,36 @@ export async function PokemonList() {
     for (let i = 1; i <= cont; i++) {
       const response = await axios.get(apiUrl + i);
       const pokemon = response.data;
-      
-      const pokemonDetails ={
-      name: pokemon.name,
-      id: pokemon.id.toString().padStart(3, '0'),
-      image: pokemon.sprites.front_default,
-      type: pokemon.types.map((type) => type.type.name).join(', '),
-      colors: pokemon.types.map((type) => colors[type.type.name]),  
-    }; 
-  pokemons.push(pokemonDetails);  
-  
-  pokemons.forEach((pokemon) => {
-    const pokemonColors = pokemon.colors;
-    const pokemonTypeElements = document.querySelectorAll(`.${pokemon.name.toLowerCase()}-type`);
+      console.log(pokemon);
 
-    pokemonTypeElements.forEach((element) => {
-      element.style.color = pokemonColors[0]; // Asignar color al texto del tipo
-      element.style.backgroundColor = pokemonColors[0]; // Asignar color de fondo al tipo
-    });
-  });
+      const pokemonDetails = {
+        name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).toLowerCase(),
+        id: pokemon.id.toString().padStart(3, '0'),
+        image: pokemon.sprites.front_default,
+        image2: pokemon.sprites.front_shiny,
+        experience: pokemon.base_experience,
+        height: pokemon.height,
+        weight: pokemon.weight,
+        area: pokemon.location_area_encounters,
+        /* stats: {
+          hp: pokemon.stats[0].base_stat,
+          attack: pokemon.stats[1].base_stat,
+          defense: pokemon.stats[2].base_stat,
+          speed: pokemon.stats[5].base_stat,
+        }, */
+        types: pokemon.types.map((type) => ({
+          name: type.type.name,
+          color: colors[type.type.name],
+        })),
+      };
 
-  console.log(pokemons);
-    }  
-  }  catch(error) {
-          console.log("Error: No se pueden obtener los datos", error);
-        }
-  return pokemons;
-}           
+      pokemons.push(pokemonDetails);
+    }
+
+    return pokemons;
+
+  } catch (error) {
+    console.log("Error: No se pueden obtener los datos", error);
+    return [];
+  }
+}
