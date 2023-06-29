@@ -26,6 +26,9 @@
   margin-left: 0.625rem;
   text-decoration: none;
 }
+a{
+    text-decoration: none;
+}
 
 
 </style>
