@@ -1,6 +1,7 @@
 <script setup >
 import LogoPokedex from '../components/LogoPokedex.vue'
 import CardComponent from '../components/CardComponent.vue'; 
+import FooterComponent from '../components/FooterComponent.vue';
 </script>
 
 
@@ -9,6 +10,7 @@ import CardComponent from '../components/CardComponent.vue';
     <LogoPokedex/>
     <CardComponent/>
 </div>
+<FooterComponent/>
 </template>
 
 <style>
