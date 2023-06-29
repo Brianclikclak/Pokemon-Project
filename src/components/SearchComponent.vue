@@ -1,3 +1,4 @@
+
 <template>
     <div class="search-container">
         <input type="text" class="search" placeholder="Busca tu pokemon!"/>
@@ -28,3 +29,5 @@
 
 
 </style>
+=======
+
