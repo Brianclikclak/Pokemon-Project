@@ -9,7 +9,9 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     }
+    ,
+   
   ]
 })
 
-export default router
+export default router;
