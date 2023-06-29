@@ -40,14 +40,21 @@
   
     
     <div class="card-face back-container">
-      <div class="img-container">
+      <!-- <div class="img-container">
         <img :src="pokemon.image2" alt="">
-      </div>
+      </div> -->
       <div class="back-info">
-        <span class="experience" data-prefix="Experience"> #{{ pokemon.experience }}</span> 
-        <span class="height" data-prefix="Height"> #{{ pokemon.height }}</span> 
-        <span class="weight" data-prefix="Weight"> #{{ pokemon.weight }}</span> 
-       <!--  <span class="area" data-prefix="Location"> #{{ pokemon.area }}</span> --> 
+        <!-- <span class="experience" data-prefix="Experience"> {{ pokemon.experience }}</span>  -->
+        <!-- <span class="location" data-prefix="Location">{{ pokemon.area }}</span> -->
+        <span class="height" data-prefix="Height:"> {{ pokemon.height }}</span> 
+        <span class="weight" data-prefix="Weight:"> {{ pokemon.weight }}</span>
+        <span data-prefix="HP:">{{ pokemon.stats.hp }}</span>
+        <span data-prefix="Attack:">{{ pokemon.stats.attack }}</span>
+        <span data-prefix="Defense:">{{ pokemon.stats.defense }}</span> 
+        <span data-prefix="Special-Defense:">{{ pokemon.stats.specialDefense }}</span> 
+        <span data-prefix="Special-Attack:">{{ pokemon.stats.specialAttack }}</span>
+        <span data-prefix="Speed:">{{ pokemon.stats.speed }}</span>  
+
       </div> 
     </div> 
   </div> 
@@ -88,7 +95,8 @@
 }
 
 .pokemon {
-  background-color: rgb(235, 245, 148);
+  /* background-color: rgb(235, 245, 148); */
+  
   border-radius: 10px;
   box-shadow: 0 3px 25px rgba(27, 110, 236, 0.5);
   transform-style: preserve-3d;
@@ -172,10 +180,12 @@
 } 
 
 .back-info{
-  margin-top: 10px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-wrap: wrap;
+  font-size: 25px;
   
 }
 
