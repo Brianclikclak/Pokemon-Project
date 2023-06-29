@@ -1,21 +1,19 @@
-
 <script setup >
-
 import LogoPokedex from '../components/LogoPokedex.vue'
 import CardComponent from '../components/CardComponent.vue'; 
-import FilterComponent from '../components/FilterComponent.vue';
-import SearchComponent from '../components/SearchComponent.vue';
-
 </script>
 
 
-<template>
-   
+<template>   
 <div>
     <LogoPokedex/>
-    <SearchComponent/>
-    <FilterComponent/>
     <CardComponent/>
 </div>
 </template>
+
+<style>
+body{
+    background-image: url(../assets/images/container_bg.png);
+}
+</style>
 

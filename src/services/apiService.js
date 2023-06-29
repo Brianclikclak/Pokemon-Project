@@ -40,13 +40,15 @@ export async function PokemonList() {
         experience: pokemon.base_experience,
         height: pokemon.height,
         weight: pokemon.weight,
-        /*area: pokemon.location_area_encounters,
+        area: pokemon.location_area_encounters,
          stats: {
           hp: pokemon.stats[0].base_stat,
           attack: pokemon.stats[1].base_stat,
           defense: pokemon.stats[2].base_stat,
+          specialAttack: pokemon.stats[3].base_stat,
+          specialDefense: pokemon.stats[4].base_stat,
           speed: pokemon.stats[5].base_stat,
-        }, */
+        },
         types: pokemon.types.map((type) => ({
           name: type.type.name,
           color: colors[type.type.name],

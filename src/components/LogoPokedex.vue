@@ -14,7 +14,7 @@
 }
 
 .logo{
-    width:300px;
+    width:500px;
     margin-top:40px;
 }
 

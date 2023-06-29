@@ -1,82 +1,128 @@
 <script>
-    import { ref, onMounted } from 'vue';
-    import { PokemonList } from '../services/apiService.js';
-    
-    export default {
-    name: 'CardComponent',
-    setup(){
-        const pokemons = ref([]);
-    
-    onMounted(async() => {
-        pokemons.value= await PokemonList();
-        });
-      
-    return {
-        pokemons, 
-    };
-},
+import { ref, onMounted } from 'vue';
+import { PokemonList } from '../services/apiService.js';
+import FilterComponent from './FilterComponent.vue';
+import SearchComponent from './SearchComponent.vue';
+
+export default {
+  name: 'CardComponent',
+  components: {
+    FilterComponent,
+    SearchComponent,
+  },
+  setup() {
+    const pokemons = ref([]);
+    const filteredPokemons = ref([]);
+    const searchName = ref('');
+    const selectedType = ref('');
+
+    onMounted(async () => {
+      pokemons.value = await PokemonList();
+      filteredPokemons.value = pokemons.value;
+    });
+
+    const toggleCard = (pokemon) => {
+      pokemon.showBack = !pokemon.showBack;
     };
 
+    const handleFilterByType = (type) => {
+      selectedType.value = type;
+      if (selectedType.value !== '') {
+        filteredPokemons.value = pokemons.value.filter((pokemon) =>
+          pokemon.types.some((type) => type.name === selectedType.value)
+        );
+      } else {
+        filteredPokemons.value = pokemons.value;
+      }
+    };
+
+    const handleSearchByName = (name) => {
+      searchName.value = name;
+      if (searchName.value.trim() !== '') {
+        filteredPokemons.value = pokemons.value.filter((pokemon) =>
+          pokemon.name.toLowerCase().includes(searchName.value.trim().toLowerCase())
+        );
+      } else {
+        filteredPokemons.value = pokemons.value;
+      }
+    };
+
+    return {
+      filteredPokemons,
+      toggleCard,
+      handleFilterByType,
+      handleSearchByName,
+    };
+  },
+};
 </script>
 
-<template>
-  <div class="poke-container">
 
-    <div class="pokemon" v-for="pokemon in pokemons" :key="pokemon.name" @click="DetailCardComponent">
-      <div class="card-face front-container">
-        <div class="img-container">
-          <img :src="pokemon.image" alt="">
-        </div>
-        <div class="info">
-          <span class="number">#{{ pokemon.id }}</span> 
-          <h3 class="name">{{ pokemon.name }}</h3> 
-        </div>
-      <div class="types">
-        <div class="type" v-for="(type, index) in pokemon.types" :key="index" :style="{ backgroundColor: type.color }">
-          {{ type.name }}
-        </div>
-      </div>   
-    </div> 
-  
+
+
+<template>
+  <div>
     
-    <div class="card-face back-container">
-      <div class="img-container">
-        <img :src="pokemon.image2" alt="">
+    <SearchComponent @search-by-name="handleSearchByName" />
+    <FilterComponent @filter-by-type="handleFilterByType" />
+    
+
+    <div class="poke-container">
+      <div class="pokemon" v-for="pokemon in filteredPokemons" :key="pokemon.name" @click="toggleCard(pokemon)">
+        <div class="card-face front-container">
+          <div class="img-container">
+            <img :src="pokemon.image" alt="">
+          </div>
+          <div class="info">
+            <span class="number">#{{ pokemon.id }}</span>
+            <h3 class="name">{{ pokemon.name }}</h3>
+          </div>
+          <div class="types">
+            <div class="type" v-for="(type, index) in pokemon.types" :key="index" :style="{ backgroundColor: type.color }">
+              {{ type.name }}
+            </div>
+          </div>
+        </div>
+
+        <div class="card-face back-container">
+          <div class="back-info">
+            <span class="height" data-prefix="Height:">{{ pokemon.height }}</span>
+            <span class="weight" data-prefix="Weight:">{{ pokemon.weight }}</span>
+            <span data-prefix="HP:">{{ pokemon.stats.hp }}</span>
+            <span data-prefix="Attack:">{{ pokemon.stats.attack }}</span>
+            <span data-prefix="Defense:">{{ pokemon.stats.defense }}</span>
+            <span data-prefix="Special-Defense:">{{ pokemon.stats.specialDefense }}</span>
+            <span data-prefix="Special-Attack:">{{ pokemon.stats.specialAttack }}</span>
+            <span data-prefix="Speed:">{{ pokemon.stats.speed }}</span>
+          </div>
+        </div>
       </div>
-      <div class="back-info">
-        <span class="experience" data-prefix="Experience"> #{{ pokemon.experience }}</span> 
-        <span class="height" data-prefix="Height"> #{{ pokemon.height }}</span> 
-        <span class="weight" data-prefix="Weight"> #{{ pokemon.weight }}</span> 
-       <!--  <span class="area" data-prefix="Location"> #{{ pokemon.area }}</span> --> 
-      </div> 
-    </div> 
-  </div> 
-</div>
+    </div>
+  </div>
 </template>
 
 
-<style>
 
+<style scoped>
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400&display=swap");
 
 * {
   box-sizing: border-box;
 }
 
- body {
+body {
   font-family: "Lato", sans-serif;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   margin: 0;
-  background-image: url(../assets/images/container_bg.png);
-} 
+}
 
- h2 {
+h2 {
   display: flex;
   justify-content: center;
-} 
+}
 
 .poke-container {
   width: 100%;
@@ -95,23 +141,23 @@
   transition: transform 0.4s;
   position: relative;
   width: 270px;
-  height: 350px;  
+  height: 350px;
   margin: 10px;
   perspective: 1000px;
 }
 
 .pokemon:hover {
-      transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
-.card-face{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
 }
 
-.back-container{
+.back-container {
   transform: rotateY(180deg);
 }
 
@@ -123,13 +169,12 @@
   text-align: center;
   margin: 0 auto;
   margin-top: 20px;
-} 
+}
 
 .pokemon .img-container img {
   max-width: 90%;
   width: 300px;
-} 
-
+}
 
 .pokemon .info {
   margin-top: 10px;
@@ -151,9 +196,9 @@
 .pokemon .info .name {
   margin: 15px 0 7px;
   letter-spacing: 1px;
-} 
+}
 
-.types{
+.types {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -163,20 +208,21 @@
   margin: 0 auto;
 }
 
-.type{
+.type {
   border-radius: 3px;
   padding: 8px;
   width: 80px;
   color: white;
   text-align: center;
-} 
+}
 
-.back-info{
-  margin-top: 10px;
+.back-info {
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+  flex-wrap: wrap;
+  font-size: 25px;
 }
 
 .back-info span::before {
@@ -185,5 +231,4 @@
   color: rgb(20, 93, 202);
   padding: 10px;
 }
-
 </style>
