@@ -18,7 +18,7 @@ export default {
 <template>
     <form class="filter">
       <div class="filter__type">
-        <label for="type" class="type__title">Search by type</label>
+        <label for="type" class="type__title"></label>
         <div class="search__container-filter">
           <select v-model="selectedType" name="type" id="type" class="type__select">
             <option value="" class="type__option" selected>Select type</option>
@@ -62,6 +62,7 @@ button{
   background-color: rgb(235, 245, 148);
   margin-left: 0.625rem;
   text-decoration: none;
+  cursor: pointer;
   
 }
 
