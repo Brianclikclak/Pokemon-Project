@@ -30,11 +30,23 @@ export async function PokemonList() {
     for (let i = 1; i <= cont; i++) {
       const response = await axios.get(apiUrl + i);
       const pokemon = response.data;
+      console.log(pokemon);
 
       const pokemonDetails = {
         name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).toLowerCase(),
         id: pokemon.id.toString().padStart(3, '0'),
         image: pokemon.sprites.front_default,
+        image2: pokemon.sprites.front_shiny,
+        experience: pokemon.base_experience,
+        height: pokemon.height,
+        weight: pokemon.weight,
+        /*area: pokemon.location_area_encounters,
+         stats: {
+          hp: pokemon.stats[0].base_stat,
+          attack: pokemon.stats[1].base_stat,
+          defense: pokemon.stats[2].base_stat,
+          speed: pokemon.stats[5].base_stat,
+        }, */
         types: pokemon.types.map((type) => ({
           name: type.type.name,
           color: colors[type.type.name],
@@ -45,19 +57,9 @@ export async function PokemonList() {
     }
 
     return pokemons;
+
   } catch (error) {
     console.log("Error: No se pueden obtener los datos", error);
     return [];
   }
 }
-
-
-
-  
-
-   
-    
-
-
-
-

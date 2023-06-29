@@ -1,4 +1,3 @@
-
 <script>
     import { ref, onMounted } from 'vue';
     import { PokemonList } from '../services/apiService.js';
@@ -13,42 +12,47 @@
         });
       
     return {
-        pokemons,
-        
+        pokemons, 
     };
 },
-
     };
 
 </script>
 
 <template>
-<!-- <h2><img src="https://user-images.githubusercontent.com/29473781/180619084-a56960ab-7efa-4e34-9d33-4e3e581d62ff.png" alt=""></h2> -->
-  
   <div class="poke-container">
-    <div class="pokemon" v-for="pokemon in pokemons" :key="pokemon.name" >
-      <div class="img-container">
-        <img :src="pokemon.image" alt="">
-      </div>
-      <div class="info">
-        <span class="number">#{{ pokemon.id }}</span> 
-        <h3 class="name">{{ pokemon.name }}</h3> 
-      </div>
-      <!-- <small class="type" :style="{ backgroundColor: pokemon.colors[0] }"><span>{{ pokemon.type }}</span></small> -->
+
+    <div class="pokemon" v-for="pokemon in pokemons" :key="pokemon.name" @click="DetailCardComponent">
+      <div class="card-face front-container">
+        <div class="img-container">
+          <img :src="pokemon.image" alt="">
+        </div>
+        <div class="info">
+          <span class="number">#{{ pokemon.id }}</span> 
+          <h3 class="name">{{ pokemon.name }}</h3> 
+        </div>
       <div class="types">
         <div class="type" v-for="(type, index) in pokemon.types" :key="index" :style="{ backgroundColor: type.color }">
           {{ type.name }}
         </div>
+      </div>   
+    </div> 
+  
+    
+    <div class="card-face back-container">
+      <div class="img-container">
+        <img :src="pokemon.image2" alt="">
       </div>
-       
-      
-        
-
-        
-    </div>
+      <div class="back-info">
+        <span class="experience" data-prefix="Experience"> #{{ pokemon.experience }}</span> 
+        <span class="height" data-prefix="Height"> #{{ pokemon.height }}</span> 
+        <span class="weight" data-prefix="Weight"> #{{ pokemon.weight }}</span> 
+       <!--  <span class="area" data-prefix="Location"> #{{ pokemon.area }}</span> --> 
+      </div> 
+    </div> 
+  </div> 
 </div>
-
-  </template>
+</template>
 
 
 <style>
@@ -59,35 +63,56 @@
   box-sizing: border-box;
 }
 
-body {
+ body {
   font-family: "Lato", sans-serif;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   margin: 0;
   background-image: url(../assets/images/container_bg.png);
-}
+} 
 
-h2 {
+ h2 {
   display: flex;
   justify-content: center;
-}
+} 
 
 .poke-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 50px auto;
 }
 
 .pokemon {
-  background-color: #c0bfbf;
+  background-color: rgb(235, 245, 148);
   border-radius: 10px;
-  box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
-  padding: 20px;
-  text-align: center;
+  box-shadow: 0 3px 25px rgba(27, 110, 236, 0.5);
+  transform-style: preserve-3d;
+  transition: transform 0.4s;
+  position: relative;
+  width: 270px;
+  height: 350px;  
+  margin: 10px;
+  perspective: 1000px;
+}
+
+.pokemon:hover {
+      transform: rotateY(180deg);
+}
+
+.card-face{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.back-container{
+  transform: rotateY(180deg);
 }
 
 .pokemon .img-container {
@@ -97,22 +122,21 @@ h2 {
   height: 200px;
   text-align: center;
   margin: 0 auto;
-}
+  margin-top: 20px;
+} 
 
 .pokemon .img-container img {
   max-width: 90%;
-  margin-top: 20px;
-  width: 200px;
-    
-   
-    
-
-    
-}
+  width: 300px;
+} 
 
 
 .pokemon .info {
-  margin-top: 20px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .pokemon .info .number {
@@ -127,22 +151,39 @@ h2 {
 .pokemon .info .name {
   margin: 15px 0 7px;
   letter-spacing: 1px;
-}
-.types{
-  justify-content: center;
-    max-width: 200px;
-    text-align: center;
-    display: flex;
-    gap: 5px;
-}
+} 
 
+.types{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-width: 200px;
+  margin: 0 auto;
+}
 
 .type{
   border-radius: 3px;
   padding: 8px;
   width: 80px;
   color: white;
-  
+  text-align: center;
+} 
+
+.back-info{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   
 }
+
+.back-info span::before {
+  content: attr(data-prefix);
+  font-weight: bold;
+  color: rgb(20, 93, 202);
+  padding: 10px;
+}
+
 </style>
