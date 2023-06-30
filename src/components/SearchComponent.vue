@@ -37,7 +37,7 @@ export default {
   padding: 5px 20px;
   font-size: 14px;
   font-weight: 700;
-  background-color: rgb(235, 245, 148);
+  background-color: rgba(255, 203, 5, 0.644);
   margin-left: 0.625rem;
   cursor: pointer;
 }

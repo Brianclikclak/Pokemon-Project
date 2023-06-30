@@ -134,7 +134,7 @@ h2 {
 }
 
 .pokemon {
-  background-color: rgb(235, 245, 148);
+  background-color: rgba(255, 203, 5, 0.644);
   border-radius: 10px;
   box-shadow: 0 3px 25px rgba(27, 110, 236, 0.5);
   transform-style: preserve-3d;
@@ -206,6 +206,7 @@ h2 {
   gap: 5px;
   max-width: 200px;
   margin: 0 auto;
+  font-family: Verdana, Tahoma, sans-serif;
 }
 
 .type {

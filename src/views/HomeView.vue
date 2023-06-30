@@ -17,5 +17,10 @@ import FooterComponent from '../components/FooterComponent.vue';
 body{
     background-image: url(../assets/images/container_bg.png);
 }
+@media screen and (max-width: 500px){
+body {
+    margin-left: 50px;
+}
+}
 </style>
 
