@@ -18,4 +18,10 @@
     margin-top:40px;
 }
 
+@media screen and (max-width: 500px){
+
+}
+.logo{
+width: 400px;
+}
 </style>
