@@ -1,7 +1,7 @@
 
 <template>
     <div class="logo-container">
-        <a href="/"><img class="logo" src="../assets/images/Logo.png" alt=""/></a>
+        <a href="/"><img class="logo" src="../assets/images/Pokédex_logo.png" alt=""/></a>
     </div>
 </template>
 
